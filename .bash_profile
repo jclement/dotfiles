@@ -7,8 +7,10 @@ if [ -f "${HOME}/.bashrc" ] ; then
 fi
 
 # Hack so that I can startup a cygwin session in a particular place
-if [ -n "$SHELLHERE_PATH" ]; then
-  cd "`cygpath -u "$SHELLHERE_PATH"`"
+if [ `uname -o` == "Cygwin" ]; then
+  if [ -n "$SHELLHERE_PATH" ]; then
+    cd "`cygpath -u "$SHELLHERE_PATH"`"
+  fi
 fi
 unset SHELLHERE_PATH
 
