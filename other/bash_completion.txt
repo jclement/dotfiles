@@ -1,0 +1,6 @@
+/etc/profile.d/bash_completion.sh
+
+Fixes slow startup time in Cygwin.
+
+Reference:
+  http://cfc.kizzx2.com/index.php/cygwin-slow-start-up-the-culprit-discovered/
