@@ -6,7 +6,7 @@ if [ -f ~/.bashrc_local ]; then
 fi
 
 # Aliases
-source ~/.dotfiles/.bash_aliases
+source ~/.dotfiles/bash_aliases
 
 if [ -f ~/.bash_aliases_local ]; then
   source ~/.bash_aliases_local
