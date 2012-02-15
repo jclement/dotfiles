@@ -1,6 +1,10 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+if [ -f ~/.bashrc_local ]; then
+  source ~/.bashrc_local
+fi
+
 # Aliases
 source ~/.dotfiles/.bash_aliases
 
@@ -13,7 +17,16 @@ export PS1='\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} $(__git_ps1)\007"'
 
 # Include per-user bin folder in path
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/.dotfiles/bin
+
+# Todo.TXT
+export TODOTXT_CFG_FILE=~/.dotfiles/todo.cfg
+export TODOTXT_VERBOSE=0
+alias t="todo.sh -c" 
+alias tl="t list"
+alias ta="t add"
+alias td="t do"
+tl
 
 # Add git autocompletion goodness
 source ~/.dotfiles/bin/git-completion.sh
