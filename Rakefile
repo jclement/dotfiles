@@ -25,9 +25,7 @@ require 'erb'
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
-  puts "test"
   Dir['*'].each do |file|
-    puts file
     next if %w[Rakefile README.markdown other bin].include? file
     
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
