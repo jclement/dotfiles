@@ -25,7 +25,7 @@ colorscheme elflord
 
 au BufNewFile,BufRead *.config setfiletype xml
 
-if has("gui") 
+if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
   endif
