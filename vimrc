@@ -27,13 +27,13 @@ au BufNewFile,BufRead *.config setfiletype xml
 
 if has("gui") 
   if has("win32")
-    set guioptions-=T
-    set guioptions-=m
     set guifont=Consolas:h8
-    set lines=999
-    set columns=999
-    set wrap
   endif
+  set guioptions-=T
+  set guioptions-=m
+  set lines=999
+  set columns=999
+  set wrap
 endif
 
 "define 3 custom highlight groups
