@@ -30,3 +30,9 @@ tl
 
 # Add git autocompletion goodness
 source ~/.dotfiles/bin/git-completion.sh
+
+#RVM
+if [ -f ~/.rvm/scripts/rvm ]; then
+  [[ -s "/home/jsc/.rvm/scripts/rvm" ]] && source "/home/jsc/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+  rvm use 1.9.3
+fi
