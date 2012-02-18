@@ -1,11 +1,12 @@
+" == Lusty Explorer ========================================
+" <Leader>lf  - Opens filesystem explorer.
+" <Leader>lr  - Opens filesystem explorer at the directory of the current file.
+" <Leader>lb  - Opens buffer explorer.
+" <Leader>lg  - Opens buffer grep. 
+
+" ############################################################ 
+
 set t_Co=256
-
-let g:ctrlp_working_path_mode=2
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-
-let g:bufExplorerShowRelativePath=1
 
 set nocompatible 
 set hidden
@@ -37,34 +38,26 @@ set directory=$HOME/tmp//,.
 "let mapleader = ","
 map <Leader>t :FuzzyFinderTextMate<Enter>
 
-" Prevent Arrow Navigator... For training purposes.
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
-
 syntax on
 
-set background=dark
-"colorscheme solarized
-colorscheme vividchalk
-"colorscheme elflord
 
 au BufNewFile,BufRead *.config setfiletype xml
 
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
+  else
+    set guifont=Monospace\ 8
   endif
   set guioptions-=T
   set guioptions-=m
   set lines=999
   set columns=999
   set wrap
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme vividchalk
 endif
 
 "define 3 custom highlight groups
@@ -90,3 +83,10 @@ map <leader>tp :tabprevious<cr>
 map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
+
+" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
+let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+
+let g:bufExplorerShowRelativePath=1
