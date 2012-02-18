@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+# Enable vi mode
+set -o vi
+
 export EDITOR=vim
 
 if [ -f ~/.bashrc_local ]; then
@@ -36,5 +39,5 @@ source ~/.dotfiles/bin/git-completion.sh
 #RVM
 if [ -f ~/.rvm/scripts/rvm ]; then
   [[ -s "/home/jsc/.rvm/scripts/rvm" ]] && source "/home/jsc/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-  rvm use 1.9.3
+  rvm use 1.9.3 > /dev/null
 fi
