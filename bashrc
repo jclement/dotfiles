@@ -3,18 +3,18 @@
 
 # Enable vi mode
 set -o vi
-
 export EDITOR=vim
-
-if [ -f ~/.bashrc_local ]; then
-  source ~/.bashrc_local
-fi
 
 # Aliases
 source ~/.dotfiles/bash_aliases
 
+# Local aliases / configuration
 if [ -f ~/.bash_aliases_local ]; then
   source ~/.bash_aliases_local
+fi
+
+if [ -f ~/.bashrc_local ]; then
+  source ~/.bashrc_local
 fi
 
 # Wizbang prompt with GIT bits
@@ -36,8 +36,14 @@ tl
 # Add git autocompletion goodness
 source ~/.dotfiles/bin/git-completion.sh
 
-#RVM
+# RVM
 if [ -f ~/.rvm/scripts/rvm ]; then
   [[ -s "/home/jsc/.rvm/scripts/rvm" ]] && source "/home/jsc/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
   rvm use 1.9.3 > /dev/null
+fi
+
+# SSH Keychain
+if [ -f /usr/bin/keychain ]; then
+  /usr/bin/keychain -q ~/.ssh/id_dsa
+  source .keychain/`hostname`-sh
 fi
