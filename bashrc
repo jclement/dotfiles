@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+export EDITOR=vim
+
 if [ -f ~/.bashrc_local ]; then
   source ~/.bashrc_local
 fi

@@ -1,27 +1,53 @@
+set t_Co=256
+
+let g:bufExplorerShowRelativePath=1
+
 set nocompatible 
 set hidden
 set wildmenu
+set wildmode=list:longest
 set ignorecase
 set smartcase
 "set cursorline
 "set showtabline=2
+
 set tabstop=2
+set softtabstop=2
 set shiftwidth=2
+set expandtab
+
 set hlsearch
 set incsearch
-set nobackup
 set number
 set nowrap
 set autoindent
 set smartindent
-set expandtab
 set vb t_vb=
 set title
 set ls=2
 
+set nobackup
+set directory=$HOME/tmp//,.
+
+"let mapleader = ","
+map <Leader>t :FuzzyFinderTextMate<Enter>
+
+" Prevent Arrow Navigator... For training purposes.
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
+
 syntax on
 
-colorscheme elflord
+set background=dark
+"colorscheme solarized
+colorscheme vividchalk
+"colorscheme elflord
 
 au BufNewFile,BufRead *.config setfiletype xml
 
@@ -48,3 +74,14 @@ set statusline+=%2*  "switch to User2 highlight
 set statusline+=%y   "filetype
 set statusline+=%3*  "switch to User3 highlight
 set statusline+=(%l,%c)   "line number
+
+" Tab mappings.
+map <leader>tt :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmov
