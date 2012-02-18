@@ -1,5 +1,10 @@
 set t_Co=256
 
+let g:ctrlp_working_path_mode=2
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+
 let g:bufExplorerShowRelativePath=1
 
 set nocompatible 
