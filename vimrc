@@ -102,3 +102,6 @@ hi default ShowMarksHLm ctermfg=black ctermbg=white cterm=bold guifg=blu
 " Don't leave visual move when changing indentation...
 vmap > >gv
 vmap < <gv
+
+autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
+autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
