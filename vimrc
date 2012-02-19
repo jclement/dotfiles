@@ -30,6 +30,8 @@ set number
 set nowrap
 set autoindent
 set smartindent
+filetype plugin indent on
+
 set vb t_vb=
 set title
 set ls=2
