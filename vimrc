@@ -37,7 +37,11 @@ set title
 set ls=2
 
 set nobackup
-set directory=$HOME/tmp//,.
+if has("win32")
+  set directory=c:/temp//,.
+else
+  set directory=$HOME/tmp//,.
+endif
 
 "let mapleader = ","
 map <Leader>t :FuzzyFinderTextMate<Enter>
@@ -109,5 +113,13 @@ vmap < <gv
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
 
-let g:LustyExplorerSuppressRubyWarning = 1
-
+" Hacks for Lusty Explorer on Win32 Vim
+if has("ruby")
+  if has("win32")
+    " set encoding to utf-8 because windows seems to force it to Latin1 which
+    " causes Lusty Explorer to break.  Also for ruby integration on Windows we
+    " need these patched binaries:
+    " http://wyw.dcweb.cn/vim/gvim73.zip
+    set enc=utf-8
+  endif
+endif
