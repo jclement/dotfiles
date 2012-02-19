@@ -92,3 +92,13 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 let g:bufExplorerShowRelativePath=1
+
+" Highlighting: Setup some nice colours to show the mark positions.
+hi default ShowMarksHLl ctermfg=black ctermbg=white cterm=bold guifg=blu
+hi default ShowMarksHLu ctermfg=black ctermbg=white cterm=bold guifg=blu
+hi default ShowMarksHLo ctermfg=black ctermbg=white cterm=bold guifg=blu
+hi default ShowMarksHLm ctermfg=black ctermbg=white cterm=bold guifg=blu
+
+" Don't leave visual move when changing indentation...
+vmap > >gv
+vmap < <gv
