@@ -25,25 +25,29 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} $(__git_ps1)
 export PATH=$PATH:~/bin:~/.dotfiles/bin
 
 # Todo.TXT
-export TODOTXT_CFG_FILE=~/.dotfiles/todo.cfg
-export TODOTXT_VERBOSE=0
-alias t="todo.sh -c" 
-alias tl="t list"
-alias ta="t add"
-alias td="t do"
-tl
+if [ -f ~/.todo/todo.txt ]; then
+  export TODOTXT_CFG_FILE=~/.dotfiles/todo.cfg
+  export TODOTXT_VERBOSE=0
+  alias t="todo.sh -c" 
+  alias tl="t list"
+  alias ta="t add"
+  alias td="t do"
+  todo.sh -c list 
+fi
 
 # Add git autocompletion goodness
 source ~/.dotfiles/bin/git-completion.sh
 
 # RVM
-if [ -f ~/.rvm/scripts/rvm ]; then
-  [[ -s "/home/jsc/.rvm/scripts/rvm" ]] && source "/home/jsc/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [ -f /usr/local/rvm/scripts/rvm ]; then
+  [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
   rvm use 1.9.3 > /dev/null
 fi
 
 # SSH Keychain
 if [ -f /usr/bin/keychain ]; then
-  /usr/bin/keychain -q ~/.ssh/id_dsa
-  source .keychain/`hostname`-sh
+  if [ -f ~/.ssh/id_dsa ]; then
+    /usr/bin/keychain -q ~/.ssh/id_dsa
+    source .keychain/`hostname`-sh
+  fi
 fi
