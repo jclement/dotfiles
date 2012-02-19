@@ -58,8 +58,9 @@ if has("gui_running")
   set lines=999
   set columns=999
   set wrap
-  set background=dark
-  colorscheme solarized
+  "set background=dark
+  "colorscheme solarized
+  colorscheme vividchalk
 else
   colorscheme vividchalk
 endif
@@ -96,10 +97,10 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:bufExplorerShowRelativePath=1
 
 " Highlighting: Setup some nice colours to show the mark positions.
-hi default ShowMarksHLl ctermfg=black ctermbg=white cterm=bold guifg=blu
-hi default ShowMarksHLu ctermfg=black ctermbg=white cterm=bold guifg=blu
-hi default ShowMarksHLo ctermfg=black ctermbg=white cterm=bold guifg=blu
-hi default ShowMarksHLm ctermfg=black ctermbg=white cterm=bold guifg=blu
+hi default ShowMarksHLl ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
+hi default ShowMarksHLu ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
+hi default ShowMarksHLo ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
+hi default ShowMarksHLm ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
@@ -107,3 +108,6 @@ vmap < <gv
 
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
+
+let g:LustyExplorerSuppressRubyWarning = 1
+
