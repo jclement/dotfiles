@@ -112,6 +112,7 @@ vmap < <gv
 
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
+autocmd FileType markdown map <leader>r :!mdr --open % <cr><cr>
 
 " Hacks for Lusty Explorer on Win32 Vim
 if has("ruby")
