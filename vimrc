@@ -39,7 +39,7 @@ set ls=2
 set nobackup
 set directory=$HOME/tmp//,.
 
-"let mapleader = ","
+let mapleader = ","
 map <Leader>t :FuzzyFinderTextMate<Enter>
 
 syntax on
@@ -89,6 +89,8 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
 
+map <Leader>u <Plug>MakeGreen
+
 " CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
 let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
@@ -108,6 +110,7 @@ vmap < <gv
 
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
+autocmd FileType ruby compiler rubyunit
 
 let g:LustyExplorerSuppressRubyWarning = 1
 
