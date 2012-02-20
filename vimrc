@@ -127,3 +127,7 @@ if has("ruby")
     set enc=utf-8
   endif
 endif
+
+" Remap Arrow keys for buffer navigator
+map <Left> :bp<cr>
+map <Right> :bn<cr>
