@@ -19,7 +19,7 @@
   ff = merge --ff-only
   pullff = pull --ff-only
   noff = merge --no-ff
-  l = "!source ~/.dotfiles/bin/githelpers && pretty_git_log"
+  l = "!~/.dotfiles/bin/githelpers"
   la = !git l --all
   div = divergence
   gn = goodness
