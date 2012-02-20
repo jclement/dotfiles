@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+require "launchy"
+require "optparse"
+require "tempfile"
+
+Options = Struct.new(:inputFilename, :outputFilename, :enableToc, :numberedHeaders, :openAfter, :tempOutput)
+
+def parse_commandline(args)
+  options = Options.new
+  opts = OptionParser.new do |opts|
+    opts.banner = "Usage: #{__FILE__} [options] [input file]"
+    opts.separator " "
+    opts.separator "Specific options:"
+    opts.on("-t","--enable-toc","Enable generation of a table of contents") do |t|
+      options.enableToc = t
+    end
+    opts.on("-n","--numbered-sections","Number section headers") do |t|
+      options.numberedHeaders = t
+    end
+    opts.on("-b","--open-in-browser","Open in Browser") do |t|
+      options.openAfter = t
+    end
+    opts.on(nil, "--temp", "Render to temporary file") do |t|
+      if t
+        # undoubtedly this is wrong
+        options.outputFilename = Tempfile.new("markdown").path + ".html"
+      end
+    end
+    opts.on_tail("-h", "--help", "Show help") do 
+      puts opts
+      exit
+    end
+    opts.parse!(args)
+  end
+  
+  options.inputFilename = args[0]
+
+  if !options.outputFilename
+    options.outputFilename = "#{File.basename(ARGV[0], File.extname(ARGV[0]))}.html"
+  end
+
+  return options
+end
+
+options = parse_commandline(ARGV)
+
+params = []
+params << "pandoc"
+params << "--to=html"
+params << "--standalone"
+params << options.inputFilename
+params << "-o"
+params << options.outputFilename
+params << "--template=/home/jsc/.dotfiles/other/template.html"
+params << "--table-of-contents" if options.enableToc
+params << "--number-sections" if options.numberedHeaders
+
+system *params 
+
+Launchy.open(options.outputFilename) if options.openAfter
