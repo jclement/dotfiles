@@ -48,9 +48,9 @@ map <Leader>t :FuzzyFinderTextMate<Enter>
 
 syntax on
 
-
 au BufNewFile,BufRead *.config setfiletype xml
 
+set background=dark
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
@@ -131,3 +131,10 @@ endif
 " Remap Arrow keys for buffer navigator
 map <Left> :bp<cr>
 map <Right> :bn<cr>
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
