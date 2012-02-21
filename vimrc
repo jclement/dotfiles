@@ -1,9 +1,8 @@
 " == Lusty Explorer ========================================
-" <Leader>lf  - Opens filesystem explorer.
-" <Leader>lr  - Opens filesystem explorer at the directory of the current file.
-" <Leader>lb  - Opens buffer explorer.
-" <Leader>lg  - Opens buffer grep. 
-
+" <Leader>lf - Opens filesystem explorer.
+" <Leader>lr - Opens filesystem explorer at the directory of the current file.
+" <Leader>lb - Opens buffer explorer.
+" <Leader>lg - Opens buffer grep.
 " ############################################################ 
 
 call pathogen#infect()
@@ -48,9 +47,9 @@ map <Leader>t :FuzzyFinderTextMate<Enter>
 
 syntax on
 
-
 au BufNewFile,BufRead *.config setfiletype xml
 
+set background=dark
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
@@ -127,3 +126,19 @@ if has("ruby")
     set enc=utf-8
   endif
 endif
+
+" Remap Arrow keys for buffer navigator
+map <Left> :bp<cr>
+map <Right> :bn<cr>
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>

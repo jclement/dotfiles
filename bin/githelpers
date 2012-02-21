@@ -33,3 +33,4 @@ pretty_git_log() {
         less -FXRS
 }
 
+pretty_git_log
