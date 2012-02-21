@@ -49,6 +49,7 @@ let g:fuzzy_ignore = "*.exe;*.dll;*.pdb"
 syntax on
 
 au BufNewFile,BufRead *.config setfiletype xml
+au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
 if has("gui_running") 
