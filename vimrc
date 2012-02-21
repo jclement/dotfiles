@@ -1,9 +1,8 @@
 " == Lusty Explorer ========================================
-" <Leader>lf  - Opens filesystem explorer.
-" <Leader>lr  - Opens filesystem explorer at the directory of the current file.
-" <Leader>lb  - Opens buffer explorer.
-" <Leader>lg  - Opens buffer grep. 
-
+" <Leader>lf - Opens filesystem explorer.
+" <Leader>lr - Opens filesystem explorer at the directory of the current file.
+" <Leader>lb - Opens buffer explorer.
+" <Leader>lg - Opens buffer grep.
 " ############################################################ 
 
 call pathogen#infect()
@@ -138,3 +137,8 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
