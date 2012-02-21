@@ -1,0 +1,2 @@
+# Support for our XML based .config files
+--type-add=xml=.config

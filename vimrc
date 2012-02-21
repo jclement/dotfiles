@@ -96,8 +96,8 @@ map <Leader>u <Plug>MakeGreen
 
 " CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
 let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
 
 let g:bufExplorerShowRelativePath=1
 
