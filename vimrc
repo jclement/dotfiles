@@ -44,6 +44,7 @@ endif
 
 let mapleader = ","
 map <Leader>t :FuzzyFinderTextMate<Enter>
+let g:fuzzy_ignore = "*.exe;*.dll;*.pdb"
 
 syntax on
 
