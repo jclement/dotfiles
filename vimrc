@@ -74,13 +74,18 @@ hi User1 ctermfg=grey  guifg=grey
 hi User2 ctermfg=yellow guifg=yellow
 hi User3 ctermfg=green guifg=green
 
-set statusline=
-set statusline+=%1*  "switch to User1 highlight
-set statusline+=%F    "full filename
-set statusline+=%2*  "switch to User2 highlight
-set statusline+=%y   "filetype
-set statusline+=%3*  "switch to User3 highlight
-set statusline+=(%l,%c)   "line number
+" set statusline=
+" set statusline+=%1*  "switch to User1 highlight
+" set statusline+=%F    "full filename
+" set statusline+=%2*  "switch to User2 highlight
+" set statusline+=%y   "filetype
+" set statusline+=%3*  "switch to User3 highlight
+" set statusline+=(%l,%c)   "line number
+
+
+set statusline=%{&ff}\ \%{&fenc}\ \b%1.3n\ \%#StatusFTP#\%Y\
+ \%#StatusRO#\%R\ \%#StatusHLP#\%H\ \%#StatusPRV#\%W\ \%#StatusModFlag#\%M\
+ \%#StatusLine#\%f\%=\%1.7c\ \%1.7l/%L\ \%p%%
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
