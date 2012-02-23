@@ -52,6 +52,7 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
+colorscheme mustang
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
@@ -63,25 +64,25 @@ if has("gui_running")
   set lines=999
   set columns=999
   set wrap
-  "set background=dark
-  "colorscheme solarized
-  colorscheme vividchalk
 else
-  colorscheme vividchalk
 endif
 
 "define 3 custom highlight groups
-hi User1 ctermbg=black ctermfg=grey  guibg=black guifg=grey
-hi User2 ctermbg=black ctermfg=yellow guibg=black guifg=yellow
-hi User3 ctermbg=black ctermfg=green guibg=black guifg=green
+hi User1 ctermfg=grey  guifg=grey
+hi User2 ctermfg=yellow guifg=yellow
+hi User3 ctermfg=green guifg=green
 
-set statusline=
-set statusline+=%1*  "switch to User1 highlight
-set statusline+=%F    "full filename
-set statusline+=%2*  "switch to User2 highlight
-set statusline+=%y   "filetype
-set statusline+=%3*  "switch to User3 highlight
-set statusline+=(%l,%c)   "line number
+" set statusline=
+" set statusline+=%1*  "switch to User1 highlight
+" set statusline+=%F    "full filename
+" set statusline+=%2*  "switch to User2 highlight
+" set statusline+=%y   "filetype
+" set statusline+=%3*  "switch to User3 highlight
+" set statusline+=(%l,%c)   "line number
+
+set statusline=%{&ff}\ \%{&fenc}\ \b%1.3n\ \%#StatusFTP#\%Y\
+ \%#StatusRO#\%R\ \%#StatusHLP#\%H\ \%#StatusPRV#\%W\ \%#StatusModFlag#\%M\
+ \%#StatusLine#\%f\%=\%1.7c\ \%1.7l/%L\ \%p%%
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -103,12 +104,6 @@ let g:ctrlp_follow_symlinks = 1
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
 
 let g:bufExplorerShowRelativePath=1
-
-" Highlighting: Setup some nice colours to show the mark positions.
-hi default ShowMarksHLl ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
-hi default ShowMarksHLu ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
-hi default ShowMarksHLo ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
-hi default ShowMarksHLm ctermfg=black ctermbg=white cterm=bold guifg=blue guibg=white
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
@@ -149,3 +144,7 @@ vmap <Leader>a: :Tabularize /:\zs<CR>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Clear highlighting
+nnoremap <leader><space> :noh<cr>
+
