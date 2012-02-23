@@ -52,7 +52,7 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
-colorscheme vividchalk
+colorscheme mustang
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
@@ -64,8 +64,6 @@ if has("gui_running")
   set lines=999
   set columns=999
   set wrap
-  "set background=dark
-  "colorscheme solarized
 else
 endif
 
@@ -81,7 +79,6 @@ hi User3 ctermfg=green guifg=green
 " set statusline+=%y   "filetype
 " set statusline+=%3*  "switch to User3 highlight
 " set statusline+=(%l,%c)   "line number
-
 
 set statusline=%{&ff}\ \%{&fenc}\ \b%1.3n\ \%#StatusFTP#\%Y\
  \%#StatusRO#\%R\ \%#StatusHLP#\%H\ \%#StatusPRV#\%W\ \%#StatusModFlag#\%M\
