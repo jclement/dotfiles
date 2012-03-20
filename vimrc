@@ -114,6 +114,8 @@ autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent
 autocmd FileType ruby compiler rubyunit
 autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
 
+autocmd FileType mail set spell
+
 " Hacks for Lusty Explorer on Win32 Vim
 if has("ruby")
   if has("win32")

@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/etc/shorewall'
+let g:netrw_dirhist_2='/home/jsc/.procmail'
+let g:netrw_dirhist_3='/home/jsc/.mutt'
+let g:netrw_dirhist_4='/home/jsc/.procmail'
