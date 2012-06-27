@@ -1,11 +1,109 @@
-# If not running interactively, don't do anything
-[[ "$-" != *i* ]] && return
+# ~/.bashrc: executed by bash(1) for non-login shells.
 
-# Enable vi mode
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+HISTCONTROL=ignoredups:ignorespace
+shopt -s histappend
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+function realpath()
+{
+    f=$1
+
+    if [ -d $f ]; then
+        base=""
+        dir=$f
+    else
+        base="/$(basename $f)"
+        dir=$(dirname $f)
+    fi
+
+    dir=$(cd $dir && /bin/pwd)
+
+    echo "$dir$base"
+}
+
+# Set prompt path to max 2 levels for best compromise of readability and usefulness
+promptpath () {
+    realpwd=$(realpath $PWD)
+    realhome=$(realpath $HOME)
+
+    # if we are in the home directory
+    if echo $realpwd | grep -q "^$realhome"; then
+        path=$(echo $realpwd | sed "s|^$realhome|\~|")
+        if [ $path = "~" ] || [ $(dirname $path) = "~" ]; then
+            echo $path
+        else
+            echo $(basename $(dirname $path))/$(basename $path)
+        fi
+        return
+    fi
+
+    path_dir=$(dirname $PWD)
+    # if our parent dir is a top-level directory, don't mangle it
+    if [ $(dirname $path_dir) = "/" ]; then
+        echo $PWD
+    else
+        path_parent=$(basename $path_dir)
+        path_base=$(basename $PWD)
+
+        echo $path_parent/$path_base
+    fi
+}
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
+
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+
+    # Set a terminal prompt style (default is fancy color prompt)
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h \[\033[01;34m\]$(promptpath)\[\033[00m\]\$ '
+else
+    alias ls="ls -F"
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h $(promptpath)\$ '
+fi
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+run_scripts()
+{
+    for script in $1/*; do
+        [ -x "$script" ] || continue
+        . $script
+    done
+}
+
 set -o vi
 export EDITOR=vim
 
-# Aliases
 source ~/.dotfiles/bash_aliases
 
 # Local aliases / configuration
@@ -17,41 +115,6 @@ if [ -f ~/.bashrc_local ]; then
   source ~/.bashrc_local
 fi
 
-# Wizbang prompt with GIT bits
-if [ $UID -eq 0 ]; then
-  export PS1='\[\033[35m\]\t\[\033[m\]-\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\[\033[32m\]$(__git_ps1) \[\033[0m\]$ ' 
-else
-  export PS1='\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\[\033[32m\]$(__git_ps1) \[\033[0m\]$ ' 
-fi
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} $(__git_ps1)\007"'
+run_scripts $HOME/.dotfiles/bashrc.d
+run_scripts $HOME/.bashrc.d.local
 
-# Include per-user bin folder in path
-export PATH=$PATH:~/bin:~/.dotfiles/bin
-
-# Todo.TXT
-if [ -f ~/.todo/todo.txt ]; then
-  export TODOTXT_CFG_FILE=~/.dotfiles/todo.cfg
-  export TODOTXT_VERBOSE=0
-  alias t="todo.sh -c" 
-  alias tl="t list"
-  alias ta="t add"
-  alias td="t do"
-  todo.sh -c list 
-fi
-
-# Add git autocompletion goodness
-source ~/.dotfiles/bin/git-completion.sh
-
-# RVM
-if [ -f /usr/local/rvm/scripts/rvm ]; then
-  [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-  rvm use 1.9.3 > /dev/null
-fi
-
-# SSH Keychain
-if [ -f /usr/bin/keychain ]; then
-  if [ -f ~/.ssh/id_dsa ]; then
-    /usr/bin/keychain -q ~/.ssh/id_dsa
-    source .keychain/`hostname`-sh
-  fi
-fi
