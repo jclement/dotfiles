@@ -82,7 +82,12 @@ if [ "$TERM" != "dumb" ]; then
     alias egrep='egrep --color=auto'
 
     # Set a terminal prompt style (default is fancy color prompt)
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h \[\033[01;34m\]$(promptpath)\[\033[00m\]\$ '
+    if [ "$UID" == "0" ]; then
+      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h \[\033[01;34m\]$(promptpath)\[\033[00m\]\$ '
+    else
+      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h \[\033[01;34m\]$(promptpath)\[\033[00m\]\$ '
+    fi
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h \[\033[01;34m\]$(promptpath)\[\033[00m\]\$ '
 else
     alias ls="ls -F"
     alias ll='ls -alF'
