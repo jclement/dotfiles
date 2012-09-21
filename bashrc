@@ -96,7 +96,7 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h $(promptpath)\$ '
 fi
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.dotfiles/bin
 
 run_scripts()
 {
