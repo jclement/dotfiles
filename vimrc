@@ -113,7 +113,7 @@ autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
 autocmd FileType ruby compiler rubyunit
 autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
-
+autocmd FileTYpe markdown set wrap
 autocmd FileType mail set spell
 
 " Hacks for Lusty Explorer on Win32 Vim
