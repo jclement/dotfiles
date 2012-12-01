@@ -4,6 +4,16 @@
 " <Leader>lb - Opens buffer explorer.
 " <Leader>lg - Opens buffer grep.
 " ############################################################ 
+" Ctrl + P   - Open files Using CtrlP
+" ############################################################ 
+" On windows it works out better to leave configuration files in Git folders.
+" Add this to $HOME/_vimrc and it works well.
+" --
+" let &runtimepath.=',$HOME/My Documents/GitHub/dotfiles/vim/'
+" source $HOME/My Documents/GitHub/dotfiles/vimrc
+" --
+" ############################################################ 
+
 
 call pathogen#infect()
 
