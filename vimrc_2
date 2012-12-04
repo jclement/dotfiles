@@ -19,26 +19,6 @@ call pathogen#infect()
 
 set t_Co=256
 
-set nocompatible 
-set hidden
-set wildmenu
-set wildmode=list:longest
-set ignorecase
-set smartcase
-"set cursorline
-"set showtabline=2
-
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-
-set hlsearch
-set incsearch
-set number
-set nowrap
-set autoindent
-set smartindent
 filetype plugin indent on
 
 set vb t_vb=
@@ -53,6 +33,8 @@ else
 endif
 
 let mapleader = ","
+map <Leader>t :FuzzyFinderTextMate<Enter>
+let g:fuzzy_ignore = "*.exe;*.dll;*.pdb;*.ocx;*.OCX;*.pdf"
 
 syntax on
 
