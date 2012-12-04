@@ -1,0 +1,27 @@
+snippet castle 
+	<castle>
+	  
+	  <properties>
+		${2}
+	  </properties>
+	  
+	  <components>
+		${1}
+	  </components>
+
+	</castle>	  
+
+snippet <component inline
+	<component 
+	  id="${1}" 
+	  type="${2}" 
+	  service="${3}" />
+
+snippet <component long
+	<component 
+	  id="${1}" 
+	  type="${2}" 
+	  service="${3}">
+	  <parameters>
+	  </parameters>
+	</component>	  
