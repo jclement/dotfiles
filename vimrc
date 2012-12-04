@@ -60,7 +60,7 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
-colorscheme molokai
+colorscheme vividchalk
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
