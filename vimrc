@@ -159,3 +159,5 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader><space> :noh<cr>
 
 let g:snips_author='Jeff Clement'
+
+map <F2> :NERDTreeToggle<CR>
