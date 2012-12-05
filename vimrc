@@ -60,7 +60,7 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
-colorscheme vividchalk
+colorscheme grb256
 if has("gui_running") 
   if has("win32")
     set guifont=Consolas:h8
@@ -161,3 +161,15 @@ nnoremap <leader><space> :noh<cr>
 let g:snips_author='Jeff Clement'
 
 map <F2> :NERDTreeToggle<CR>
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" Make the current window big, but leave others context
+set winwidth=84
+" We have to have a winheight bigger than we want to set winminheight. But if
+" we set winheight to be huge before winminheight, the winminheight set will
+" fail.
+set winheight=5
+set winminheight=5
+set winheight=999
+
+nnoremap <leader><leader> <c-^>
