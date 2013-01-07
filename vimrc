@@ -173,3 +173,7 @@ set winminheight=5
 set winheight=999
 
 nnoremap <leader><leader> <c-^>
+
+set list
+set list listchars=tab:>-,trail:·,extends:>
+
