@@ -63,7 +63,7 @@ set background=dark
 colorscheme vividchalk
 if has("gui_running") 
   if has("win32")
-    set guifont=Consolas:h8
+    set guifont=ProFontWindows:h8
   else
     set guifont=Monospace\ 8
   endif
@@ -177,3 +177,5 @@ nnoremap <leader><leader> <c-^>
 set list
 set list listchars=tab:>-,trail:·,extends:>
 
+"csw-
+let g:surround_45 = "<%-t(\"\r\")%>"  
