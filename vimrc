@@ -63,7 +63,7 @@ set background=dark
 colorscheme vividchalk
 if has("gui_running") 
   if has("win32")
-    set guifont=ProFontWindows:h8
+    set guifont=ProFontWindows:h7
   else
     set guifont=Monospace\ 8
   endif
