@@ -179,3 +179,6 @@ set list listchars=tab:>-,trail:·,extends:>
 
 "csw-
 let g:surround_45 = "<%-t(\"\r\")%>"  
+
+let g:GPGPreferArmor=1
+let g:GPGDefaultRecipients=["A55D0402"]
