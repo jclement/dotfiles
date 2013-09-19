@@ -19,42 +19,42 @@ function realpath()
 {
     f=$1
 
-    if [ -d $f ]; then
+    if [ -d "$f" ]; then
         base=""
         dir=$f
     else
-        base="/$(basename $f)"
-        dir=$(dirname $f)
+        base="/$(basename "$f")"
+        dir=$(dirname "$f")
     fi
 
-    dir=$(cd $dir && /bin/pwd)
+    dir=$(cd "$dir" && /bin/pwd)
 
     echo "$dir$base"
 }
 
 # Set prompt path to max 2 levels for best compromise of readability and usefulness
 promptpath () {
-    realpwd=$(realpath $PWD)
-    realhome=$(realpath $HOME)
+    realpwd=$(realpath "$PWD")
+    realhome=$(realpath "$HOME")
 
     # if we are in the home directory
     if echo $realpwd | grep -q "^$realhome"; then
         path=$(echo $realpwd | sed "s|^$realhome|\~|")
-        if [ $path = "~" ] || [ $(dirname $path) = "~" ]; then
+        if [ $path = "~" ] || [ $(dirname "$path") = "~" ]; then
             echo $path
         else
-            echo $(basename $(dirname $path))/$(basename $path)
+            echo $(basename $(dirname "$path"))/$(basename "$path")
         fi
         return
     fi
 
-    path_dir=$(dirname $PWD)
+    path_dir=$(dirname "$PWD")
     # if our parent dir is a top-level directory, don't mangle it
-    if [ $(dirname $path_dir) = "/" ]; then
+    if [ $(dirname "$path_dir") = "/" ]; then
         echo $PWD
     else
-        path_parent=$(basename $path_dir)
-        path_base=$(basename $PWD)
+        path_parent=$(basename "$path_dir")
+        path_base=$(basename "$PWD")
 
         echo $path_parent/$path_base
     fi
