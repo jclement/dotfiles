@@ -118,3 +118,5 @@ fi
 
 run_scripts $HOME/.dotfiles/bashrc.d
 run_scripts $HOME/.bashrc.d.local
+
+todo.sh list
