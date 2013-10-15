@@ -21,7 +21,6 @@ set wildmenu
 set wildmode=list:longest
 set ignorecase
 set smartcase
-set cursorline
 set showtabline=2
 
 set tabstop=2
@@ -57,8 +56,10 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
-colorscheme codeschool
+colorscheme vividchalk
 if has("gui_running") 
+  colorscheme codeschool
+  set cursorline
   if has("win32")
     set guifont=ProFontWindows:h7
   else
