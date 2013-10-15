@@ -1,8 +1,4 @@
 " == Lusty Explorer ========================================
-" <Leader>lf - Opens filesystem explorer.
-" <Leader>lr - Opens filesystem explorer at the directory of the current file.
-" <Leader>lb - Opens buffer explorer.
-" <Leader>lg - Opens buffer grep.
 " ############################################################ 
 " Ctrl + P   - Open files Using CtrlP
 " ############################################################ 
@@ -25,8 +21,8 @@ set wildmenu
 set wildmode=list:longest
 set ignorecase
 set smartcase
-"set cursorline
-"set showtabline=2
+set cursorline
+set showtabline=2
 
 set tabstop=2
 set softtabstop=2
@@ -36,6 +32,7 @@ set expandtab
 set hlsearch
 set incsearch
 set number
+set relativenumber "7.4 only
 set nowrap
 set autoindent
 set smartindent
@@ -60,7 +57,7 @@ au BufNewFile,BufRead *.config setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
-colorscheme vividchalk
+colorscheme codeschool
 if has("gui_running") 
   if has("win32")
     set guifont=ProFontWindows:h7
@@ -103,15 +100,11 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
 
-map <Leader>u <Plug>MakeGreen
-
 " CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
 let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
 let g:ctrlp_follow_symlinks = 1
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
-
-let g:bufExplorerShowRelativePath=1
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
@@ -124,15 +117,8 @@ autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
 autocmd FileTYpe markdown set wrap
 autocmd FileType mail set spell
 
-" Hacks for Lusty Explorer on Win32 Vim
-if has("ruby")
-  if has("win32")
-    " set encoding to utf-8 because windows seems to force it to Latin1 which
-    " causes Lusty Explorer to break.  Also for ruby integration on Windows we
-    " need these patched binaries:
-    " http://wyw.dcweb.cn/vim/gvim73.zip
-    set enc=utf-8
-  endif
+if has("win32")
+  set enc=utf-8
 endif
 
 " Remap Arrow keys for buffer navigator
@@ -163,14 +149,14 @@ let g:snips_author='Jeff Clement'
 map <F2> :NERDTreeToggle<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" Make the current window big, but leave others context
-set winwidth=84
-" We have to have a winheight bigger than we want to set winminheight. But if
-" we set winheight to be huge before winminheight, the winminheight set will
-" fail.
-set winheight=5
-set winminheight=5
-set winheight=999
+" " Make the current window big, but leave others context
+" set winwidth=84
+" " We have to have a winheight bigger than we want to set winminheight. But if
+" " we set winheight to be huge before winminheight, the winminheight set will
+" " fail.
+" set winheight=5
+" set winminheight=5
+" set winheight=999
 
 nnoremap <leader><leader> <c-^>
 
