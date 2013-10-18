@@ -58,7 +58,8 @@ au BufNewFile,BufRead *.msbuild setfiletype xml
 set background=dark
 colorscheme vividchalk
 if has("gui_running") 
-  colorscheme codeschool
+  "colorscheme codeschool
+  colorscheme seoul256
   set cursorline
   if has("win32")
     set guifont=ProFontWindows:h7
