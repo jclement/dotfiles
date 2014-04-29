@@ -162,8 +162,8 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 nnoremap <leader><leader> <c-^>
 
-set list
-set list listchars=tab:>-,trail:·,extends:>
+"set list
+"set list listchars=tab:>-,trail:·,extends:>
 
 "csw-
 let g:surround_45 = "<%-t(\"\r\")%>"  
