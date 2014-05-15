@@ -59,10 +59,11 @@ set background=dark
 colorscheme vividchalk
 if has("gui_running") 
   "colorscheme codeschool
-  colorscheme seoul256
+  "colorscheme seoul256
+  colorscheme molokai
   set cursorline
   if has("win32")
-    set guifont=ProFontWindows:h7
+    set guifont=ProFontWindows:h9
   else
     set guifont=Monospace\ 8
   endif
