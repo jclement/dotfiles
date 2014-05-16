@@ -64,7 +64,8 @@ if has("gui_running")
   if has("win32")
     set guifont=ProFontWindows:h7
   else
-    set guifont=Monospace\ 8
+    "set guifont=Monospace\ 8
+    set guifont=ProFontWindows\ 10
   endif
   set guioptions-=T
   set guioptions-=m
