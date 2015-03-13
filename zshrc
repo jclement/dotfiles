@@ -42,16 +42,21 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# vi bindings
 bindkey -v
+
+function laststatus {return $?}
+
+# if keychain is installed, start it up assuming the usual key 
+# types.  Only for non-root.
+if [[ $EUID -ne 0 ]]; then
+  which keychain >> /dev/null
+  if laststatus; then
+    eval `keychain -q --eval --agents ssh id_ed25519 id_rsa`
+  fi 
+fi
+
+# if local zshrc exists, source it.
+if [ -f ~/.zshrc_local ]; then
+  source ~/.zshrc_local
+fi
