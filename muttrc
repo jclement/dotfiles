@@ -1,0 +1,26 @@
+set imap_check_subscribed
+set header_cache=~/.cache/mutt
+set message_cachedir="~/.cache/mutt"
+unset imap_passive
+set imap_keepalive=300
+set mail_check=122
+
+set editor="vim -c 'set spell spelllang=en'"
+set edit_headers = yes
+
+set smart_wrap = yes
+
+source ~/.mutt/account-fastmail
+source ~/.mutt/gpg.rc
+source ~/.mutt/colors
+
+set alias_file=~/.mutt/aliases
+set sort_alias=alias
+set reverse_alias=yes
+source ~/.mutt/aliases
+
+set pgp_use_gpg_agent = yes
+set pgp_autosign
+set crypt_autosign = yes
+set crypt_replyencrypt = yes
+
