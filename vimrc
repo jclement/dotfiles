@@ -53,6 +53,7 @@ let mapleader = ","
 syntax on
 
 au BufNewFile,BufRead *.config setfiletype xml
+au BufNewFile,BufRead *.config.sample setfiletype xml
 au BufNewFile,BufRead *.msbuild setfiletype xml
 
 set background=dark
@@ -60,13 +61,14 @@ colorscheme vividchalk
 if has("gui_running") 
   "colorscheme codeschool
   "colorscheme seoul256
-  colorscheme vividchalk
+  colorscheme molokai
+  "colorscheme jellybeans
+  "colorscheme mochalatte
   set cursorline
   if has("win32")
-    set guifont=ProFontWindows:h7
+    set guifont=ProFontWindows:h9
   else
     set guifont=Monospace\ 8
-    "set guifont=ProFontWindows\ 10
   endif
   set guioptions-=T
   set guioptions-=m
