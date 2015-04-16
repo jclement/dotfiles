@@ -47,6 +47,13 @@ bindkey -v
 
 function laststatus {return $?}
 
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+     . "${HOME}/.gpg-agent-info"
+       export GPG_AGENT_INFO
+       export SSH_AUTH_SOCK
+       export SSH_AGENT_PID
+fi
+
 # if keychain is installed, start it up assuming the usual key 
 # types.  Only for non-root.
 if [[ $EUID -ne 0 ]]; then
