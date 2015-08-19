@@ -79,7 +79,7 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'Elive/vim-colorscheme-elive'
 Bundle 'zeis/vim-kolor'
 
-Bundle 'msanders/snipmate.vim'
+Bundle 'garbas/vim-snipmate'
 
 call vundle#end()
 
@@ -189,9 +189,7 @@ autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent
 autocmd FileType ruby compiler rubyunit
 autocmd FileType mail set spell
 
-if has("win32")
-  set enc=utf-8
-endif
+set enc=utf-8
 
 " Remap Arrow keys for buffer navigator
 map <Left> :bp<cr>
