@@ -1,6 +1,4 @@
 " ############################################################ 
-" Ctrl + P   - Open files Using CtrlP
-" ############################################################ 
 " On windows it works out better to leave configuration files in Git folders.
 " Add this to $HOME/_vimrc and it works well.
 " --
@@ -9,6 +7,7 @@
 " --
 " ############################################################ 
 
+let mapleader = ","
 
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=$HOME/My\ Documents/GitHub/dotfiles/vim/bungle/Vundle.vim
@@ -120,7 +119,6 @@ else
   set directory=$HOME/tmp//,.
 endif
 
-let mapleader = ","
 
 augroup cline
     au!
