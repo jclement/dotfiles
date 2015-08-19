@@ -79,6 +79,8 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'Elive/vim-colorscheme-elive'
 Bundle 'zeis/vim-kolor'
 
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 
 call vundle#end()
