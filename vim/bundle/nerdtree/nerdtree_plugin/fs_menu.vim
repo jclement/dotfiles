@@ -24,7 +24,7 @@ call NERDTreeAddMenuItem({'text': '(a)dd a childnode', 'shortcut': 'a', 'callbac
 call NERDTreeAddMenuItem({'text': '(m)ove the current node', 'shortcut': 'm', 'callback': 'NERDTreeMoveNode'})
 call NERDTreeAddMenuItem({'text': '(d)elete the current node', 'shortcut': 'd', 'callback': 'NERDTreeDeleteNode'})
 
-if has("gui_mac") || has("gui_macvim")
+if has("gui_mac") || has("gui_macvim") 
     call NERDTreeAddMenuItem({'text': '(r)eveal in Finder the current node', 'shortcut': 'r', 'callback': 'NERDTreeRevealInFinder'})
     call NERDTreeAddMenuItem({'text': '(o)pen the current node with system editor', 'shortcut': 'o', 'callback': 'NERDTreeExecuteFile'})
     call NERDTreeAddMenuItem({'text': '(q)uicklook the current node', 'shortcut': 'q', 'callback': 'NERDTreeQuickLook'})
@@ -82,15 +82,13 @@ endfunction
 function! s:promptToRenameBuffer(bufnum, msg, newFileName)
     echo a:msg
     if g:NERDTreeAutoDeleteBuffer || nr2char(getchar()) ==# 'y'
-        let quotedFileName = "'" . a:newFileName . "'"
         " 1. ensure that a new buffer is loaded
-        exec "badd " . quotedFileName
+        exec "badd " . a:newFileName
         " 2. ensure that all windows which display the just deleted filename
-        " display a buffer for a new filename.
+        " display a buffer for a new filename. 
         let s:originalTabNumber = tabpagenr()
         let s:originalWindowNumber = winnr()
-        let editStr = g:NERDTreePath.New(a:newFileName).str({'format': 'Edit'})
-        exec "tabdo windo if winbufnr(0) == " . a:bufnum . " | exec ':e! " . editStr . "' | endif"
+        exec "tabdo windo if winbufnr(0) == " . a:bufnum . " | exec ':e! " . a:newFileName . "' | endif"
         exec "tabnext " . s:originalTabNumber
         exec s:originalWindowNumber . "wincmd w"
         " 3. We don't need a previous buffer anymore
@@ -116,10 +114,7 @@ function! NERDTreeAddNode()
         let parentNode = b:NERDTreeRoot.findNode(newPath.getParent())
 
         let newTreeNode = g:NERDTreeFileNode.New(newPath)
-        if empty(parentNode)
-            call b:NERDTreeRoot.refresh()
-            call b:NERDTree.render()
-        elseif parentNode.isOpen || !empty(parentNode.children)
+        if parentNode.isOpen || !empty(parentNode.children)
             call parentNode.addChild(newTreeNode, 1)
             call NERDTreeRender()
             call newTreeNode.putCursorHere(1, 0)
@@ -143,7 +138,7 @@ function! NERDTreeMoveNode()
     endif
 
     try
-        let bufnum = bufnr("^".curNode.path.str()."$")
+        let bufnum = bufnr(curNode.path.str())
 
         call curNode.rename(newNodePath)
         call NERDTreeRender()
@@ -191,7 +186,7 @@ function! NERDTreeDeleteNode()
 
             "if the node is open in a buffer, ask the user if they want to
             "close that buffer
-            let bufnum = bufnr("^".currentNode.path.str()."$")
+            let bufnum = bufnr(currentNode.path.str())
             if buflisted(bufnum)
                 let prompt = "\nNode deleted.\n\nThe file is open in buffer ". bufnum . (bufwinnr(bufnum) ==# -1 ? " (hidden)" : "") .". Delete this buffer? (yN)"
                 call s:promptToDelBuffer(bufnum, prompt)
@@ -229,10 +224,7 @@ function! NERDTreeCopyNode()
         if confirmed
             try
                 let newNode = currentNode.copy(newNodePath)
-                if empty(newNode)
-                    call b:NERDTreeRoot.refresh()
-                    call b:NERDTree.render()
-                else
+                if !empty(newNode)
                     call NERDTreeRender()
                     call newNode.putCursorHere(0, 0)
                 endif
