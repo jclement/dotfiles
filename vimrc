@@ -79,6 +79,17 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'Elive/vim-colorscheme-elive'
 Bundle 'zeis/vim-kolor'
 
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'maxbrunsfeld/vim-yankstack'
+
+Bundle 'vim-scripts/YankRing.vim'
+let g:yankring_replace_n_pkey = '<leader>['
+let g:yankring_replace_n_nkey = '<leader>]'
+nmap <leader>y :YRShow<cr>
+
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
