@@ -1,4 +1,3 @@
-" == Lusty Explorer ========================================
 " ############################################################ 
 " Ctrl + P   - Open files Using CtrlP
 " ############################################################ 
@@ -11,7 +10,79 @@
 " ############################################################ 
 
 
-call pathogen#infect()
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/My\ Documents/GitHub/dotfiles/vim/bungle/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" === CTRL+P ========================
+Bundle 'kien/ctrlp.vim'
+" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
+let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
+let g:ctrlp_follow_symlinks = 1
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
+
+" === MARKDOWN =======================
+Bundle 'plasticboy/vim-markdown'
+autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
+autocmd FileTYpe markdown set wrap
+autocmd FileType markdown set spell
+
+" === SILVER SEARCH =====================
+Bundle 'rking/ag.vim'
+nnoremap <leader>a :Ag -i<space>
+
+" === INDENT LINE =======================
+Bundle 'Yggdroot/indentLine'
+set list lcs=tab:\|\ 
+let g:indentLine_color_term = 111
+let g:indentLine_color_gui = '#333333'
+let g:indentLine_char = 'c'
+"let g:indentLine_char = '∙▹¦'
+let g:indentLine_char = '∙'
+let g:indentLine_enabled = 1
+
+" === NERD TREE =====================
+Bundle 'scrooloose/nerdtree'
+map <F2> :NERDTreeToggle<CR>
+" Disable the scrollbars (NERDTree)
+set guioptions-=r
+set guioptions-=L
+" Keep NERDTree window fixed between multiple toggles
+set winfixwidth
+
+Bundle 'vim-scripts/scratch.vim'
+
+Bundle 'troydm/easybuffer.vim'
+nmap <leader>be :EasyBufferToggle<cr>
+
+Bundle 'terryma/vim-multiple-cursors'
+
+Bundle 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+
+Bundle 'majutsushi/tagbar'
+nmap <leader>t :TagbarToggle<CR>
+
+Bundle 'scrooloose/nerdcommenter'
+nmap <leader># :call NERDComment(0, "invert")<cr>
+vmap <leader># :call NERDComment(0, "invert")<cr>
+
+Bundle 'sjl/badwolf'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
+Bundle 'zaiste/Atom'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'chriskempson/base16-vim'
+Bundle 'Elive/vim-colorscheme-elive'
+Bundle 'zeis/vim-kolor'
+
+Bundle 'msanders/snipmate.vim'
+
+call vundle#end()
 
 set t_Co=256
 
@@ -27,7 +98,6 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-
 set hlsearch
 set incsearch
 set number
@@ -35,6 +105,8 @@ set relativenumber "7.4 only
 set nowrap
 set autoindent
 set smartindent
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:␣
+set showbreak=↪
 filetype plugin indent on
 
 set vb t_vb=
@@ -50,6 +122,20 @@ endif
 
 let mapleader = ","
 
+augroup cline
+    au!
+    au WinLeave * set nocursorline
+    au WinEnter * set cursorline
+    au InsertEnter * set nocursorline
+    au InsertLeave * set cursorline
+augroup END
+
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:␣
+    au InsertLeave * :set listchars+=trail:␣
+augroup END
+
 syntax on
 
 au BufNewFile,BufRead *.config setfiletype xml
@@ -59,16 +145,16 @@ au BufNewFile,BufRead *.msbuild setfiletype xml
 set background=dark
 colorscheme vividchalk
 if has("gui_running") 
-  "colorscheme codeschool
-  "colorscheme seoul256
-  colorscheme molokai
-  "colorscheme jellybeans
-  "colorscheme mochalatte
+  colorscheme badwolf
   set cursorline
   if has("win32")
     set guifont=ProFontWindows:h9
+  elseif has("gui_macvim")
+    set macmeta " fix alt?
+    set guifont=Inconsolata\ for\ Powerline:h14
+    let g:airline_powerline_fonts = 1
   else
-    set guifont=Monospace\ 8
+    set guifont=Inconsolata:h12
   endif
   set guioptions-=T
   set guioptions-=m
@@ -83,17 +169,6 @@ hi User1 ctermfg=grey  guifg=grey
 hi User2 ctermfg=yellow guifg=yellow
 hi User3 ctermfg=green guifg=green
 
-" set statusline=
-" set statusline+=%1*  "switch to User1 highlight
-" set statusline+=%F    "full filename
-" set statusline+=%2*  "switch to User2 highlight
-" set statusline+=%y   "filetype
-" set statusline+=%3*  "switch to User3 highlight
-" set statusline+=(%l,%c)   "line number
-
-set statusline=%{&ff}\ \%{&fenc}\ \b%1.3n\ \%#StatusFTP#\%Y\
- \%#StatusRO#\%R\ \%#StatusHLP#\%H\ \%#StatusPRV#\%W\ \%#StatusModFlag#\%M\
- \%#StatusLine#\%f\%=\%1.7c\ \%1.7l/%L\ \%p%%
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -106,11 +181,6 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
 
-" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
-let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
-let g:ctrlp_follow_symlinks = 1
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
@@ -119,8 +189,6 @@ vmap < <gv
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
 autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
 autocmd FileType ruby compiler rubyunit
-autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
-autocmd FileTYpe markdown set wrap
 autocmd FileType mail set spell
 
 if has("win32")
@@ -150,27 +218,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Clear highlighting
 nnoremap <leader><space> :noh<cr>
 
-let g:snips_author='Jeff Clement'
-
-map <F2> :NERDTreeToggle<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-" " Make the current window big, but leave others context
-" set winwidth=84
-" " We have to have a winheight bigger than we want to set winminheight. But if
-" " we set winheight to be huge before winminheight, the winminheight set will
-" " fail.
-" set winheight=5
-" set winminheight=5
-" set winheight=999
 
 nnoremap <leader><leader> <c-^>
 
-"set list
-"set list listchars=tab:>-,trail:·,extends:>
-
-"csw-
-let g:surround_45 = "<%-t(\"\r\")%>"  
-
-let g:GPGPreferArmor=1
-let g:GPGDefaultRecipients=["A55D0402"]
