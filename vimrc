@@ -1,5 +1,12 @@
 " ############################################################ 
-" Ctrl + P   - Open files Using CtrlP
+" Key Bindings
+" --- --------
+" Ctrl + P      : Open files Using CtrlP
+" F2            : Nerd Tree
+" vip<ENTER>*,  : easy align, all commas in currect paragraph
+" ,#            : comment/uncomment
+" ,a            : silver search
+" ,be           : easy buffer
 " ############################################################ 
 " On windows it works out better to leave configuration files in Git folders.
 " Add this to $HOME/_vimrc and it works well.
@@ -65,8 +72,6 @@ if has("gui_running")
   elseif has("gui_macvim")
     set guifont=Inconsolata\ for\ Powerline:h14
     let g:airline_powerline_fonts = 1
-
-
   else
   endif
   set guioptions-=T
@@ -104,8 +109,8 @@ autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent
 autocmd FileType ruby compiler rubyunit
 
 autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
-autocmd FileTYpe markdown set wrap
-autocmd FileTYpe markdown set wrap
+autocmd FileType markdown set wrap
+autocmd FileType markdown set wrap
 autocmd FileTYpe markdown set spell
 
 autocmd FileType mail set spell
@@ -198,3 +203,9 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" === EASYALIGN ==============================================
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
