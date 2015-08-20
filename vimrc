@@ -42,6 +42,8 @@ set ls=2
 
 set nolazyredraw
 
+set showbreak=↪
+
 set nobackup
 if has("win32")
   set directory=c:/temp//,.
@@ -60,10 +62,12 @@ if has("gui_running")
   set cursorline
   if has("win32")
     set guifont=ProFontWindows:h9
-  elseif has("gui_macos")
-    set guifont=Inconsolata\ for\ Powerline:h9
+  elseif has("gui_macvim")
+    set guifont=Inconsolata\ for\ Powerline:h14
+    let g:airline_powerline_fonts = 1
+
+
   else
-    set guifont=Monospace\ 8
   endif
   set guioptions-=T
   set guioptions-=m
@@ -135,8 +139,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Clear highlighting
 nnoremap <leader><space> :noh<cr>
 
-let g:snips_author='Jeff Clement'
-
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " " Make the current window big, but leave others context
@@ -152,6 +154,14 @@ nnoremap <leader><leader> <c-^>
 
 "set list
 set list listchars=tab:>-,trail:·,extends:>
+
+" Trailing whitespace {{{   
+" Only shown when not in insert mode so I don't go insane.
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:·
+    au InsertLeave * :set listchars+=trail:·
+augroup END
 
 " === AG.VIM ====================================================
 nnoremap <leader>a :Ag -i<space>
