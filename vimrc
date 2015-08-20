@@ -1,4 +1,3 @@
-" == Lusty Explorer ========================================
 " ############################################################ 
 " Ctrl + P   - Open files Using CtrlP
 " ############################################################ 
@@ -41,6 +40,8 @@ set vb t_vb=
 set title
 set ls=2
 
+set nolazyredraw
+
 set nobackup
 if has("win32")
   set directory=c:/temp//,.
@@ -52,10 +53,6 @@ let mapleader = ","
 
 syntax on
 
-au BufNewFile,BufRead *.config setfiletype xml
-au BufNewFile,BufRead *.config.sample setfiletype xml
-au BufNewFile,BufRead *.msbuild setfiletype xml
-
 set background=dark
 colorscheme vividchalk
 if has("gui_running") 
@@ -64,7 +61,7 @@ if has("gui_running")
   if has("win32")
     set guifont=ProFontWindows:h9
   elseif has("gui_macos")
-    set guifont=ProFontWindows:h9
+    set guifont=Inconsolata\ for\ Powerline:h9
   else
     set guifont=Monospace\ 8
   endif
@@ -76,9 +73,6 @@ if has("gui_running")
 else
 endif
 
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#enabled = 1
 
 "define 3 custom highlight groups
 hi User1 ctermfg=grey  guifg=grey
@@ -96,11 +90,6 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
 
-" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
-let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
-let g:ctrlp_follow_symlinks = 1
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
@@ -117,9 +106,11 @@ autocmd FileTYpe markdown set spell
 
 autocmd FileType mail set spell
 
-if has("win32")
-  set enc=utf-8
-endif
+au BufNewFile,BufRead *.config setfiletype xml
+au BufNewFile,BufRead *.config.sample setfiletype xml
+au BufNewFile,BufRead *.msbuild setfiletype xml
+
+set enc=utf-8
 
 " Remap Arrow keys for buffer navigator
 map <Left> :bp<cr>
@@ -146,7 +137,6 @@ nnoremap <leader><space> :noh<cr>
 
 let g:snips_author='Jeff Clement'
 
-map <F2> :NERDTreeToggle<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " " Make the current window big, but leave others context
@@ -161,7 +151,40 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader><leader> <c-^>
 
 "set list
-"set list listchars=tab:>-,trail:·,extends:>
+set list listchars=tab:>-,trail:·,extends:>
 
-"csw-
-let g:surround_45 = "<%-t(\"\r\")%>"  
+" === AG.VIM ====================================================
+nnoremap <leader>a :Ag -i<space>
+
+" === CTRL+P ====================================================
+" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
+let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
+let g:ctrlp_follow_symlinks = 1
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
+"
+" === NERDTREE ==================================================
+map <F2> :NERDTreeToggle<CR>
+set guioptions-=r
+set guioptions-=L
+" Keep NERDTree window fixed between multiple toggles
+set winfixwidth
+
+" === EASY BUFFER ===============================================
+nmap <leader>be :EasyBufferToggle<cr>
+
+" === NERD COMMENT ==============================================
+nmap <leader># :call NERDComment(0, "invert")<cr>
+vmap <leader># :call NERDComment(0, "invert")<cr>
+
+" === AIRLINE ==============================================
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+
+" === ULTISNIPS ==============================================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
