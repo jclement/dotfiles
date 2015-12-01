@@ -1,4 +1,4 @@
-" ############################################################ 
+" ############################################################
 " Key Bindings
 " --- --------
 " Ctrl + P      : Open files Using CtrlP
@@ -7,21 +7,21 @@
 " ,#            : comment/uncomment
 " ,a            : silver search
 " ,be           : easy buffer
-" ############################################################ 
+" ############################################################
 " On windows it works out better to leave configuration files in Git folders.
 " Add this to $HOME/_vimrc and it works well.
 " --
 " let &runtimepath.=',$HOME/My Documents/GitHub/dotfiles/vim/'
 " source $HOME/My Documents/GitHub/dotfiles/vimrc
 " --
-" ############################################################ 
+" ############################################################
 
 
 call pathogen#infect()
 
 set t_Co=256
 
-set nocompatible 
+set nocompatible
 set hidden
 set wildmenu
 set wildmode=list:longest
@@ -64,7 +64,7 @@ syntax on
 
 set background=dark
 colorscheme vividchalk
-if has("gui_running") 
+if has("gui_running")
   colorscheme badwolf
   set cursorline
   if has("win32")
@@ -105,7 +105,7 @@ vmap > >gv
 vmap < <gv
 
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
-autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
+autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent
 autocmd FileType ruby compiler rubyunit
 
 autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
@@ -160,7 +160,7 @@ nnoremap <leader><leader> <c-^>
 "set list
 set list listchars=tab:>-,trail:·,extends:>
 
-" Trailing whitespace {{{   
+" Trailing whitespace {{{
 " Only shown when not in insert mode so I don't go insane.
 augroup trailing
     au!
@@ -214,11 +214,6 @@ nmap <leader>be :EasyBufferToggle<cr>
 " === NERD COMMENT ==============================================
 nmap <leader># :call NERDComment(0, "invert")<cr>
 vmap <leader># :call NERDComment(0, "invert")<cr>
-
-" === AIRLINE ==============================================
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#enabled = 1
 
 " === ULTISNIPS ==============================================
 let g:UltiSnipsExpandTrigger="<tab>"
