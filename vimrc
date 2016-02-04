@@ -1,21 +1,27 @@
-" == Lusty Explorer ========================================
-" ############################################################ 
-" Ctrl + P   - Open files Using CtrlP
-" ############################################################ 
+" ############################################################
+" Key Bindings
+" --- --------
+" Ctrl + P      : Open files Using CtrlP
+" F2            : Nerd Tree
+" vip<ENTER>*,  : easy align, all commas in currect paragraph
+" ,#            : comment/uncomment
+" ,a            : silver search
+" ,be           : easy buffer
+" ############################################################
 " On windows it works out better to leave configuration files in Git folders.
 " Add this to $HOME/_vimrc and it works well.
 " --
 " let &runtimepath.=',$HOME/My Documents/GitHub/dotfiles/vim/'
 " source $HOME/My Documents/GitHub/dotfiles/vimrc
 " --
-" ############################################################ 
+" ############################################################
 
 
 call pathogen#infect()
 
 set t_Co=256
 
-set nocompatible 
+set nocompatible
 set hidden
 set wildmenu
 set wildmode=list:longest
@@ -41,6 +47,10 @@ set vb t_vb=
 set title
 set ls=2
 
+set nolazyredraw
+
+set showbreak=↪
+
 set nobackup
 if has("win32")
   set directory=c:/temp//,.
@@ -52,23 +62,17 @@ let mapleader = ","
 
 syntax on
 
-au BufNewFile,BufRead *.config setfiletype xml
-au BufNewFile,BufRead *.config.sample setfiletype xml
-au BufNewFile,BufRead *.msbuild setfiletype xml
-
 set background=dark
 colorscheme vividchalk
-if has("gui_running") 
-  "colorscheme codeschool
-  "colorscheme seoul256
-  colorscheme molokai
-  "colorscheme jellybeans
-  "colorscheme mochalatte
+if has("gui_running")
+  colorscheme badwolf
   set cursorline
   if has("win32")
     set guifont=ProFontWindows:h9
+  elseif has("gui_macvim")
+    set guifont=Inconsolata\ for\ Powerline:h14
+    let g:airline_powerline_fonts = 1
   else
-    set guifont=Monospace\ 8
   endif
   set guioptions-=T
   set guioptions-=m
@@ -78,22 +82,11 @@ if has("gui_running")
 else
 endif
 
+
 "define 3 custom highlight groups
 hi User1 ctermfg=grey  guifg=grey
 hi User2 ctermfg=yellow guifg=yellow
 hi User3 ctermfg=green guifg=green
-
-" set statusline=
-" set statusline+=%1*  "switch to User1 highlight
-" set statusline+=%F    "full filename
-" set statusline+=%2*  "switch to User2 highlight
-" set statusline+=%y   "filetype
-" set statusline+=%3*  "switch to User3 highlight
-" set statusline+=(%l,%c)   "line number
-
-set statusline=%{&ff}\ \%{&fenc}\ \b%1.3n\ \%#StatusFTP#\%Y\
- \%#StatusRO#\%R\ \%#StatusHLP#\%H\ \%#StatusPRV#\%W\ \%#StatusModFlag#\%M\
- \%#StatusLine#\%f\%=\%1.7c\ \%1.7l/%L\ \%p%%
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -106,26 +99,27 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmov
 
-" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
-let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
-let g:ctrlp_follow_symlinks = 1
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
 
 " Don't leave visual move when changing indentation...
 vmap > >gv
 vmap < <gv
 
 autocmd FileType ruby setlocal foldmethod=syntax nofoldenable
-autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent 
+autocmd FileType ruby setlocal indentexpr=GetRubyIndent() nosmartindent
 autocmd FileType ruby compiler rubyunit
+
 autocmd FileType markdown map <leader>r :!mdr -b --temp % <cr><cr>
-autocmd FileTYpe markdown set wrap
+autocmd FileType markdown set wrap
+autocmd FileType markdown set wrap
+autocmd FileTYpe markdown set spell
+
 autocmd FileType mail set spell
 
-if has("win32")
-  set enc=utf-8
-endif
+au BufNewFile,BufRead *.config setfiletype xml
+au BufNewFile,BufRead *.config.sample setfiletype xml
+au BufNewFile,BufRead *.msbuild setfiletype xml
+
+set enc=utf-8
 
 " Remap Arrow keys for buffer navigator
 map <Left> :bp<cr>
@@ -150,9 +144,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Clear highlighting
 nnoremap <leader><space> :noh<cr>
 
-let g:snips_author='Jeff Clement'
-
-map <F2> :NERDTreeToggle<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " " Make the current window big, but leave others context
@@ -167,10 +158,72 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader><leader> <c-^>
 
 "set list
-"set list listchars=tab:>-,trail:·,extends:>
+set list listchars=tab:>-,trail:·,extends:>
 
-"csw-
-let g:surround_45 = "<%-t(\"\r\")%>"  
+" Trailing whitespace {{{
+" Only shown when not in insert mode so I don't go insane.
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:·
+    au InsertLeave * :set listchars+=trail:·
+augroup END
 
-let g:GPGPreferArmor=1
-let g:GPGDefaultRecipients=["A55D0402"]
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RemoveFancyCharacters COMMAND
+" Remove smart quotes, etc.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RemoveFancyCharacters()
+    let typo = {}
+    let typo["“"] = '"'
+    let typo["”"] = '"'
+    let typo["‘"] = "'"
+    let typo["’"] = "'"
+    let typo["–"] = '--'
+    let typo["—"] = '---'
+    let typo["…"] = '...'
+    :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+endfunction
+command! RemoveFancyCharacters :call RemoveFancyCharacters()
+
+" === AG.VIM ====================================================
+nnoremap <leader>a :Ag -i<space>
+
+" === CTRL+P ====================================================
+" CTRL-P searching (run ClearAllCtrlPCaches) after changing the list of paths to ignore
+let g:ctrlp_working_path_mode=0 " 2 = first occurance of .git or root.dir
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.exe$|\.dll$'
+let g:ctrlp_follow_symlinks = 1
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.exe,*.dll
+"
+" === NERDTREE ==================================================
+map <F2> :NERDTreeToggle<CR>
+set guioptions-=r
+set guioptions-=L
+" Keep NERDTree window fixed between multiple toggles
+set winfixwidth
+
+" === EASY BUFFER ===============================================
+nmap <leader>be :EasyBufferToggle<cr>
+
+" === NERD COMMENT ==============================================
+nmap <leader># :call NERDComment(0, "invert")<cr>
+vmap <leader># :call NERDComment(0, "invert")<cr>
+
+" === ULTISNIPS ==============================================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" === EASYALIGN ==============================================
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

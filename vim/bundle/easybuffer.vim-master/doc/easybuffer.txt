@@ -1,0 +1,166 @@
+easybuffer.vim for Vim version 7.0+   Last change: 25 January, 2014
+
+Maintainer: Dmitry "troydm" Geurkov <d.geurkov@gmail.com>
+Version: 0.1.5
+Description: easybuffer.vim is a simple plugin to quickly
+switch between buffers by just pressing keys 
+Last Change: 25 January, 2014
+License: Vim License (see :help license)
+Website: https://github.com/troydm/easybuffer.vim
+
+Help on using easybuffer.vim                                     *easybuffer.vim*
+
+1. Introduction                    |easybuffer.vim-intro|
+2. Configuration                   |easybuffer.vim-configuration|
+2. Usage                           |easybuffer.vim-usage|
+
+============================================================================================
+ 1. INTRODUCTION                                                  *easybuffer.vim-intro*
+
+easybuffer.vim - is a simple plugin to quickly switch between buffers using corresponding
+keys or buffer numbers displayed in easybuffer quick switch window  
+
+Platform: 
+    only unix based operating systems are supported
+    works on windows too but there might be some minor bugs
+
+============================================================================================
+ 2. CONFIGURATION                                        *easybuffer.vim-configuration*
+
+                                                         *g:easybuffer_chars*
+g:easybuffer_chars     (Default: ['a','s','f','q','w','e','z','x','c','v'] )
+    List of characters to use as a key switching characters
+    Note: you can't use uppercase letters and 'r' and 'd' letters as switch characters
+
+                                                         *g:easybuffer_bufname*
+g:easybuffer_bufname    (Default: 'bname' )
+    Customize buffer name display in quick switch buffer 
+    For example: "expand('#'.bnr.':t').'  '.expand('#'.bnr.':p')"
+    Note: bnr variable is buffer number and bname variable is buffer name
+
+                                                         *g:easybuffer_cursorline*
+g:easybuffer_cursorline (Default: 1)
+    Enable or disable highlighting of the current line in easybuffer
+
+                                                         *g:easybuffer_toggle_position*
+g:easybuffer_toggle_position (Default: 'Current')
+    Position of quick switch buffer window when using |EasyBufferToggle|
+    Can be |Current|, |Horizontal|, |HorizontalBelow|, |Vertical|, |VerticalRight| 
+
+                                                         *g:easybuffer_show_header*
+g:easybuffer_show_header (Default: 1)
+    If enabled 2 line help header is added to quick switch buffer
+
+                                                         *g:easybuffer_horizontal_height*
+g:easybuffer_horizontal_height (Default: '&lines/2')
+    Horizontal quick switch buffer height expression
+
+                                                         *g:easybuffer_vertical_width*
+g:easybuffer_vertical_width (Default: '&columns/2')
+    Vertical quick switch buffer width expression
+
+                                                         *g:easybuffer_use_zoomwintab*
+g:easybuffer_use_zoomwintab (Default: 0)
+    If enabled and zoomwintab plugin present automaticly zooms in when 
+    opening quick switch buffer and zooms out when closing it or selecting a buffer
+
+                                                         *g:easybuffer_use_sequence*
+g:easybuffer_use_sequence (Default: 0)
+    If enabled sequence numbers are displayed instead of buffer numbers in quick switch buffer
+
+                                                         *g:easybuffer_sort_mode*
+g:easybuffer_sort_mode (Default: '')
+    Default sort mode, can be |s| |S| |b| |B| |n| |N| |m| |M| |f| |F| respectively
+
+                                                         *g:easybuffer_sort_asc_chr*
+g:easybuffer_sort_asc_chr (Default: '▾')
+    Character to represent ascending sorting in header
+
+                                                         *g:easybuffer_sort_desc_chr*
+g:easybuffer_sort_desc_chr (Default: '▴')
+    Character to represent descending sorting in header
+
+                                                         *g:easybuffer_sort_clear_mapping*
+g:easybuffer_sort_clear_mapping (Default: ',,')
+    Key mapping to clear sorting
+
+                                                         *g:easybuffer_sort_seq_asc_mapping*
+g:easybuffer_sort_seq_asc_mapping (Default: ',s')
+    Key mapping to sort by sequence ascendingly
+
+                                                         *g:easybuffer_sort_seq_desc_mapping*
+g:easybuffer_sort_seq_desc_mapping (Default: ',S')
+    Key mapping to sort by sequence descendingly
+
+                                                         *g:easybuffer_sort_bufnr_asc_mapping*
+g:easybuffer_sort_bufnr_asc_mapping (Default: ',b')
+    Key mapping to sort by buffer number ascendingly
+
+                                                         *g:easybuffer_sort_bufnr_desc_mapping*
+g:easybuffer_sort_bufnr_desc_mapping (Default: ',B')
+    Key mapping to sort by buffer number descendingly
+
+                                                         *g:easybuffer_sort_bufname_asc_mapping*
+g:easybuffer_sort_bufname_asc_mapping (Default: ',n')
+    Key mapping to sort by buffer name ascendingly
+
+                                                         *g:easybuffer_sort_bufname_desc_mapping*
+g:easybuffer_sort_bufname_desc_mapping (Default: ',N')
+    Key mapping to sort by buffer name descendingly
+
+                                                         *g:easybuffer_sort_bufmode_asc_mapping*
+g:easybuffer_sort_bufmode_asc_mapping (Default: ',m')
+    Key mapping to sort by buffer mode ascendingly
+
+                                                         *g:easybuffer_sort_bufmode_desc_mapping*
+g:easybuffer_sort_bufmode_desc_mapping (Default: ',M')
+    Key mapping to sort by buffer mode descendingly
+
+                                                         *g:easybuffer_sort_filetype_asc_mapping*
+g:easybuffer_sort_filetype_asc_mapping (Default: ',f')
+    Key mapping to sort by filetype ascendingly
+
+                                                         *g:easybuffer_sort_filetype_desc_mapping*
+g:easybuffer_sort_filetype_desc_mapping (Default: ',F')
+    Key mapping to sort by filetype descendingly
+
+============================================================================================
+ 2. USAGE                                                         *easybuffer.vim-usage*
+
+                                                                  *EasyBuffer*
+:EasyBuffer[!]
+    Opens an quick switch buffer in current window
+    If [!] is specified shows unlisted buffers too
+    To switch to another buffer just press the corresponding key or buffer number
+    If first key sequence pressed matches more than one buffer you can finish 
+    key sequence by pressing <Enter> key
+    For example you have following buffers in quick switch:
+        <Key> <BufNr> <Mode>  <BufName>
+          a     1      #a     buffer1
+          aa    2       h     buffer2
+          as    3       u=    buffer3
+    To switch to a buffer just press a and then press <Enter> to complete key sequence 
+    Same rule applies to using buffer number key sequences
+    To delete buffer move your cursor to the line corresponding to that buffer and press d 
+    To wipeout buffer move your cursor to the line corresponding to that buffer and press D 
+    To refresh current buffer list just press R
+    To quickly go to line corresponding to some buffer press same key sequnce only in uppercase
+    To close quick switch buffer just press q
+
+                                                                  *EasyBufferHorizontal*
+:EasyBufferHorizontal[!]
+    Same as |EasyBuffer| only displays quick switch buffer in a new horizontal window
+
+                                                                  *EasyBufferHorizontalBelow*
+:EasyBufferHorizontalBelow[!]
+    Same as |EasyBuffer| only displays quick switch buffer in a new horizontal window below
+
+                                                                  *EasyBufferVertical*
+:EasyBufferVertical[!]
+    Same as |EasyBuffer| only displays quick switch buffer in a new vertical window 
+
+                                                                  *EasyBufferVerticalRight*
+:EasyBufferVerticalRight[!]
+    Same as |EasyBuffer| only displays quick switch buffer in a new vertical window on right
+
+ vim:tw=78:ts=8:ft=help:norl:

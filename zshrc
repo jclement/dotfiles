@@ -35,7 +35,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/home/jsc/bin:/usr/lib/git-core:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jsc/.dotfiles/bin"
+export PATH="$HOME/bin:/usr/lib/git-core:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jsc/.dotfiles/bin"
 
 source $ZSH/oh-my-zsh.sh
 
