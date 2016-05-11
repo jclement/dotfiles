@@ -45,7 +45,9 @@ export EDITOR='vim'
 # vi bindings
 bindkey -v
 
-function laststatus {return $?}
+function laststatus {
+  return $?
+}
 
 if [ -f "${HOME}/.gpg-agent-info" ]; then
      . "${HOME}/.gpg-agent-info"
