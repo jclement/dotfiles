@@ -1,1 +1,6 @@
 *.pyc
+
+fish/fishd.*
+fish/completions/fisher.fish
+fish/conf.d/local.fish
+
