@@ -40,7 +40,7 @@ promptpath () {
     # if we are in the home directory
     if echo $realpwd | grep -q "^$realhome"; then
         path=$(echo $realpwd | sed "s|^$realhome|\~|")
-        if [ $path = "~" ] || [ $(dirname "$path") = "~" ]; then
+        if [ "$path" = "~" ] || [ $(dirname "$path") = "~" ]; then
             echo $path
         else
             echo $(basename $(dirname "$path"))/$(basename "$path")
@@ -118,4 +118,3 @@ fi
 
 run_scripts $HOME/.dotfiles/bashrc.d
 run_scripts $HOME/.bashrc.d.local
-
