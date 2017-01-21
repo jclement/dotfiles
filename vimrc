@@ -16,6 +16,9 @@
 " --
 " ############################################################
 
+if &shell =~# 'fish$'
+  set shell=sh
+endif
 
 call pathogen#infect()
 
