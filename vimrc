@@ -73,7 +73,10 @@ if has("gui_running")
   if has("win32")
     set guifont=ProFontWindows:h9
   elseif has("gui_macvim")
-    set guifont=Inconsolata\ for\ Powerline:h14
+    "colorscheme tomorrow-grb
+    "colorscheme mustang
+    colorscheme seoul256
+    set guifont=Sauce\ Code\ Powerline:h10
     let g:airline_powerline_fonts = 1
   else
   endif
