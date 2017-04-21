@@ -22,7 +22,7 @@ DISABLE_AUTO_UPDATE="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -31,13 +31,23 @@ DISABLE_AUTO_UPDATE="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
-plugins=(git)
+plugins+=(git golang sublime)
+
+# use zsh-nvm if it's installed
+# git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+if [ -d ~/.oh-my-zsh/custom/plugins/zsh-nvm ]; then
+  export NVM_LAZY_LOAD=true
+  plugins+=(zsh-nvm)
+fi
 
 # User configuration
 
 export PATH="$HOME/bin:/usr/lib/git-core:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jsc/.dotfiles/bin"
 
-source $ZSH/oh-my-zsh.sh
+# if local zshrc exists, source it.
+if [ -f ~/.zshrc_local ]; then
+  source ~/.zshrc_local
+fi
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
@@ -65,12 +75,4 @@ if [[ $EUID -ne 0 ]]; then
   fi 
 fi
 
-# if local zshrc exists, source it.
-if [ -f ~/.zshrc_local ]; then
-  source ~/.zshrc_local
-fi
-
-if [ -d ~/.nvm ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-fi 
+source $ZSH/oh-my-zsh.sh
