@@ -105,6 +105,17 @@ run_scripts()
 set -o vi
 export EDITOR=vim
 
+transfer() {
+    # write to output to tmpfile because of progress bar
+    tmpfile=$( mktemp -t transferXXX )
+    curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
+    cat $tmpfile;
+    #cat $tmpfile | pbcopy;
+    rm -f $tmpfile;
+}
+
+alias transfer=transfer
+
 source ~/.dotfiles/bash_aliases
 
 # Local aliases / configuration
