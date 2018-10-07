@@ -1,6 +1,7 @@
 [user]
 	name = Jeff Clement
-	email = jeffrey.clement@gmail.com
+	email = jsc@nddn.net
+	signingkey = 0x76B1A823FCC65FA3
 [diff]
 [color]
   ui = auto
@@ -34,3 +35,5 @@
   tool = vimdiff
 [push]
 	default = matching
+[commit]
+	gpgsign = true
